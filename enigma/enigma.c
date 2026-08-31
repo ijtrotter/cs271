@@ -24,39 +24,56 @@ char rundo(char letter, char *rotor){
         return letter;
 }
 
-char rotors(char letter) {
-        letter = rapply(letter, ROTORFAS);
-        letter = rapply(letter, ROTORMED);
-        letter = rapply(letter, ROTORSLO);
-
-        letter = rapply(letter, ROTORREF);
-
-        letter = rundo(letter, ROTORSLO);
-        letter = rundo(letter, ROTORMED);
-        letter = rundo(letter, ROTORFAS);
-
-        return letter;
-}
-
-char shiftl(char letter, int n){
+char shift_letter(char letter, int n){
         int index = letter - LETINDEX; // get letter pos
         return mod(index + n, NUMCHARS) + LETINDEX; // shift letter according to pos 
 }
 
-char shifts(int counter, int n){
-        int sarray[7] = {
-                counter % NUMCHARS,
-                (counter / NUMCHARS) % NUMCHARS,
-                (counter / (NUMCHARS * NUMCHARS)) % NUMCHARS,
-                0, // reflector does not rotate :exploding_head:
-                (counter / (NUMCHARS * NUMCHARS)) % NUMCHARS,
-                (counter / NUMCHARS) % NUMCHARS,
-                counter % NUMCHARS,
-        };
-        return sarray[n];
+char rotor_map(char letter, int offset, char *rotor) { // offset here is how much the rotor is rotated
+        letter = shift_letter(letter, offset); // go through turned rotor
+        letter = rapply(letter, rotor); // apply the cipher
+        letter = shift_letter(letter, -offset); // exit rotor
+
+        return letter;
+}
+
+char rotor_map_inv(char letter, int offset, char *rotor) {
+        letter = shift_letter(letter, offset);
+        letter = rundo(letter, rotor);
+        letter = shift_letter(letter, -offset);
+
+        return letter;
+}
+
+char encrypt_letter(char letter, int counter) {
+        int shiftfas = counter % NUMCHARS;
+        int shiftmed = (counter / NUMCHARS) % NUMCHARS;
+        int shiftslo = (counter / (NUMCHARS * NUMCHARS)) % NUMCHARS;
+
+        letter = rotor_map(letter, shiftfas, ROTORFAS);
+        letter = rotor_map(letter, shiftmed, ROTORMED);
+        letter = rotor_map(letter, shiftslo, ROTORSLO);
+
+        letter = rotor_map(letter, 0, ROTORREF);
+
+        letter = rotor_map_inv(letter, shiftslo, ROTORSLO);
+        letter = rotor_map_inv(letter, shiftmed, ROTORMED);
+        letter = rotor_map_inv(letter, shiftfas, ROTORFAS);
+
+        return letter;
+}
+
+char *enigma(char *input) {
+        int i = 0;
+        for ( ; input[i] ; i++ ){
+                printf("%c", encrypt_letter(input[i], i+1)); // i+1 because enigma starts with one rotation
+        }
+        printf("\n");
 }
 
 int main(int argc, char **argv) {
-        printf("%c\n", rapply(argv[1][0], ROTORFAS));
+        printf("%c\n", encrypt_letter('A', 1));
+        printf("%c\n", encrypt_letter('Z', 1));
+        //printf("%c\n", rapply(argv[1][0], ROTORFAS));
         return 0;
 }

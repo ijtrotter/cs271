@@ -37,7 +37,7 @@ char rotor_map(char letter, int offset, char *rotor) { // offset here is how muc
 		return letter;
 }
 
-char rotor_map_inv(char letter, int offset, char *rotor) {
+char rotor_map_inv(char letter, int offset, char *rotor) { //..the inverse
 		letter = shift_letter(letter, offset);
 		letter = rundo(letter, rotor);
 		letter = shift_letter(letter, -offset);
@@ -73,8 +73,5 @@ void *enigma(char *input) {
 
 int main(int argc, char **argv) {
 	enigma(argv[1]);
-	//printf("%c\n", encrypt_letter('A', 1));
-	//printf("%c\n", encrypt_letter('Z', 1));
-	//printf("%c\n", rapply(argv[1][0], ROTORFAS));
 	return 0;
 }

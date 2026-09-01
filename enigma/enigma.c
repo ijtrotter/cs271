@@ -46,7 +46,7 @@ char rotor_map_inv(char letter, int offset, char *rotor) {
 }
 
 char encrypt_letter(char letter, int counter) {
-        int shiftfas = counter % NUMCHARS;
+        int shiftfas = counter % NUMCHARS; // how much the rotor rotates based on number of characters passed through
         int shiftmed = (counter / NUMCHARS) % NUMCHARS;
         int shiftslo = (counter / (NUMCHARS * NUMCHARS)) % NUMCHARS;
 
@@ -54,7 +54,7 @@ char encrypt_letter(char letter, int counter) {
         letter = rotor_map(letter, shiftmed, ROTORMED);
         letter = rotor_map(letter, shiftslo, ROTORSLO);
 
-        letter = rotor_map(letter, 0, ROTORREF);
+        letter = rotor_map(letter, 0, ROTORREF); // reflector does not rotate :exploding_head:
 
         letter = rotor_map_inv(letter, shiftslo, ROTORSLO);
         letter = rotor_map_inv(letter, shiftmed, ROTORMED);
@@ -72,8 +72,9 @@ void *enigma(char *input) {
 }
 
 int main(int argc, char **argv) {
-        printf("%c\n", encrypt_letter('A', 1));
-        printf("%c\n", encrypt_letter('Z', 1));
+        enigma(argv[1]);
+	//printf("%c\n", encrypt_letter('A', 1));
+        //printf("%c\n", encrypt_letter('Z', 1));
         //printf("%c\n", rapply(argv[1][0], ROTORFAS));
         return 0;
 }

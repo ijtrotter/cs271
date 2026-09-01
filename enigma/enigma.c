@@ -63,7 +63,7 @@ char encrypt_letter(char letter, int counter) {
         return letter;
 }
 
-char *enigma(char *input) {
+void *enigma(char *input) {
         int i = 0;
         for ( ; input[i] ; i++ ){
                 printf("%c", encrypt_letter(input[i], i+1)); // i+1 because enigma starts with one rotation

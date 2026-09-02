@@ -2,12 +2,12 @@
 
 #define mod(n, m) (((n % m) + m) % m) /* shoutout big C, shoutout stackoverflow, shoutout learning */
 
+#define ROTORS "BDFHJLCPRTXVZNYEIWGAKMUSQOAJDKSIRUXBLHWTMCQGZNPYFVOEEKMFLGDQVZNTOWYHXUSPAIBRCJIXUHFEZDAOMTKQJWNSRLCYPBVGUWYGADFPVZBECKMTHXSLRINQOJAJPCZWRLFBDKOTYUQGENHXMIVSTAGBPCSDQEUFVNZHYIXJWLRKOM"
+
 #define LETINDEX 'A'
 #define NUMCHARS 26
 
-char *ROTORS = ""
-
-char *rarray[7] = { 
+char *rarray[7] = { // this works because ROTORS is stored in a continuous chain (what call this) in RAM 
         ROTORS,
         ROTORS+26,
         ROTORS+52,
@@ -65,11 +65,6 @@ char *enigma(char *input) {
 
 
 int main(int argc, char **argv) {
-        char *code = "MNBOASVTTB";
-
-        printf("%c\n", encrypt_letter('A', 1));
-        printf("%c\n", encrypt_letter('Z', 1));
-        printf("%c\n", encrypt_letter('M', 1));
-        printf("%c\n", enigma(code));
+	enigma(argv[1]);
         return 0;
 }

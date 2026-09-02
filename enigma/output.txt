@@ -1,0 +1,15 @@
+[jaime@jaimet enigma]$ podman build -t tester .
+STEP 1/4: FROM alpine
+STEP 2/4: RUN apk add gcc libc-dev python3 curl
+--> Using cache 5e152486350ea246b3ab039704073c8c3e72338b39316a5e40dc0d81b6807458
+--> 5e152486350e
+STEP 3/4: RUN curl https://raw.githubusercontent.com/cd-c89/crypto/main/enigma/tester.py -o tester.py
+--> Using cache 740f6376ed928b033a149a7147776a29480320a2b102508e5fd29d93518aa473
+--> 740f6376ed92
+STEP 4/4: COPY enigma.c .
+COMMIT tester
+--> c941e02e1270
+Successfully tagged localhost/tester:latest
+c941e02e12708f1c1aadc8709f8a5d002b130091c5174603bc9c04b7826c3442
+[jaime@jaimet enigma]$ podman run -it tester python3 tester.py
+Perfect!

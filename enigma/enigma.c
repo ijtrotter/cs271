@@ -46,7 +46,7 @@ char rotor_map_inv(char letter, int offset, char *rotor) { //..the inverse
 }
 
 char encrypt_letter(char letter, int counter) {
-	int shiftfas = counter % NUMCHARS; // how much the rotor rotates based on number of characters passed through
+		int shiftfas = counter % NUMCHARS; // how much the rotor rotates based on number of characters passed through
 		int shiftmed = (counter / NUMCHARS) % NUMCHARS;
 		int shiftslo = (counter / (NUMCHARS * NUMCHARS)) % NUMCHARS;
 

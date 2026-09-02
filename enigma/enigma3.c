@@ -2,25 +2,19 @@
 
 #define mod(n, m) (((n % m) + m) % m) /* shoutout big C, shoutout stackoverflow, shoutout learning */
 
-#define ROTORFAS "BDFHJLCPRTXVZNYEIWGAKMUSQO"
-#define ROTORMED "AJDKSIRUXBLHWTMCQGZNPYFVOE"
-#define ROTORSLO "EKMFLGDQVZNTOWYHXUSPAIBRCJ"
-#define ROTORREF "IXUHFEZDAOMTKQJWNSRLCYPBVG"
-#define ROTORFAS_INV "TAGBPCSDQEUFVNZHYIXJWLRKOM"
-#define ROTORMED_INV "AJPCZWRLFBDKOTYUQGENHXMIVS"
-#define ROTORSLO_INV "UWYGADFPVZBECKMTHXSLRINQOJ"
-
 #define LETINDEX 'A'
 #define NUMCHARS 26
 
-char *rarray[7] = { // definitely want to change this or the definitions
-        ROTORFAS,
-        ROTORMED,
-        ROTORSLO,
-        ROTORREF,
-        ROTORSLO_INV,
-        ROTORMED_INV,
-        ROTORFAS_INV
+char *ROTORS = ""
+
+char *rarray[7] = { 
+        ROTORS,
+        ROTORS+26,
+        ROTORS+52,
+        ROTORS+78,
+        ROTORS+104,
+        ROTORS+130,
+        ROTORS+156
 };
 
 char rapply(char letter, char *rotor) {
@@ -56,7 +50,7 @@ char rotor_map(char letter, int n, char *rotor) { // n here is how much the roto
 char encrypt_letter(char letter, int counter) {
         int i = 0;
         for ( ; i < 7  ; i++){
-                letter = rotor_map(letter,shifts(counter, i), rarray[i]); // put a letter in all 7 rotors according to how much shift they have
+                letter = rotor_map(letter,shifts(counter, i), rarray[i]); // put a letter in ROTORS 7 rotors according to how much shift they have
         }
         return letter;
 }

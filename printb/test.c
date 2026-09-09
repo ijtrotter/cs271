@@ -1,18 +1,22 @@
 #include <stdio.h>
 
-char main() {
-	char m = 42;
-	char p = 1;
-	char ans = 0;
+int printb(char m) {
+        int i;
+        for ( i = 7 ; i >= 0 ; i--) {
+                int bit = (m >> i) & 1;
+                printf("%d", bit);
+        }
+        printf("\n");
+        return 0;
+}
 
-	while ( m > 0 ) {
-		printf("%d\n", m & 1);
-		ans += (m & 1) * p;
-		p *= 10;
-		
-		m = m >> 1;
-	}
-	printf("%d\n", ans);
+int main() {
+	int x = 2;
+	int y = 3;
+	printb(x);
+	printb(y);
 
+	printf("Result \n");
+	printb(~y);
 	return 0;
 }

@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-
 int printb(char m) {
 	int i;
 	for ( i = 7 ; i >= 0 ; i--) {

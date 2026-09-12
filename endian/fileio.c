@@ -6,9 +6,14 @@ int main(int argc, char **argv) {
 	uint8_t buffer[64];
 	size_t i;
 	size_t rbuffer;
-	
 	char *f_name = argv[1]; 
 	FILE *fp = fopen(f_name, "r");
+
+	if (!(argc > 1)) {
+		fprintf(stderr, "missing command arguments exiting...\n");
+		exit(1);
+	}
+
 	if (fp == NULL) {
 		fprintf(stderr, "file failed to open..probably not real: \"%s\", exiting...\n", f_name);
 		exit(1);
